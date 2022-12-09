@@ -49,6 +49,7 @@ class Deck:
     # Also shuffle the deck.
     def reset(self) -> None:
         pass
+    
 class Blackjack:
   # Creates a Blackjack game with a new Deck.
   def __init__(self):
