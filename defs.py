@@ -20,4 +20,4 @@ class Card:
     # Returns a string representation of Card
     # E.g. "Ace of Spades"
     def __str__(self) -> str:
-        return self.value + 'of' + self.suit
+        return self.value + 'of' + self.suit 
