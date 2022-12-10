@@ -31,7 +31,10 @@ class Deck:
       SUITS = ["Diamonds", "Spades", "Hearts", "Clubs"]
       VALUES = ["Ace", "Two" , "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
       
-      
+      self.deck = []
+      for suit in SUITS:
+        for value in VALUES:
+            self.deck.append(Card(suit, value))
     
     # Returns the number of Cards in the Deck
     def size(self) -> int:
