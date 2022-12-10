@@ -1,3 +1,5 @@
+import random
+
 class Card:
 
     # Card constructor
@@ -41,7 +43,8 @@ class Deck:
         pass
     # Shuffles the deck of cards. This means randomzing the order of the cards in the Deck.
     def shuffle(self) -> None:
-        pass
+        random.shuffle(self.deck)
+        
     # Returns the top Card in the deck, but does not modify the deck.
     def peek(self) -> Card:
         pass
