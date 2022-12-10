@@ -40,7 +40,8 @@ class Deck:
     
     # Returns the number of Cards in the Deck
     def size(self) -> int:
-        pass
+        print(len(self.deck))
+
     # Shuffles the deck of cards. This means randomzing the order of the cards in the Deck.
     def shuffle(self) -> None:
         random.shuffle(self.deck)
@@ -53,7 +54,7 @@ class Deck:
     def draw(self) -> Card:
         draw_card = self.deck.pop()
         # or self.deck.remove(0)?
-        return draw_card
+        print(draw_card)
 
     # Adds the input card to the deck. 
     # If the deck has more than 52 cards, do not add the card and raise an exception.
@@ -62,7 +63,7 @@ class Deck:
 
     # Calling this function should print all the cards in the deck in their current order.
     def print_deck(self) -> None:
-        pass
+        print(self.deck)
 
     # Resets the deck to it's original state with all 52 cards.
     # Also shuffle the deck.
