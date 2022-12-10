@@ -48,12 +48,12 @@ class Deck:
 
     # Returns the top Card in the deck, but does not modify the deck.
     def peek(self) -> Card:
-        pass
+        print(self.deck[0])
 
     # Removes and returns the top card in the deck. The card should no longer be in the Deck.
     def draw(self) -> Card:
-        draw_card = self.deck.pop()
-        # or self.deck.remove(0)?
+        # draw_card = self.deck.pop()
+        draw_card = self.deck.remove(0)
         print(draw_card)
 
     # Adds the input card to the deck. 
