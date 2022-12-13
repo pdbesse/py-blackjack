@@ -55,14 +55,15 @@ class Deck:
 
     # Removes and returns the top card in the deck. The card should no longer be in the Deck.
     def draw(self) -> Card:
-        drawn_card = self.deck.pop()
-        # drawn_card = self.deck.remove(0)
-        return drawn_card
+        return self.deck.pop(0)
 
     # Adds the input card to the deck. 
     # If the deck has more than 52 cards, do not add the card and raise an exception.
     def add_card(self, card: Card) -> None:
-        pass
+        if len(self.deck) < 53:
+            self.deck.append(card)
+        else:
+            raise Exception("Deck is full")
 
     # Calling this function should print all the cards in the deck in their current order.
     def print_deck(self) -> None:
