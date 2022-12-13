@@ -1,4 +1,5 @@
 import random
+from typing import List
 
 class Card:
 
@@ -77,12 +78,12 @@ class Deck:
 class Blackjack:
   # Creates a Blackjack game with a new Deck.
   def __init__(self):
-        deck = Deck.__init__()  
+        deck = Deck() 
         # init empty hand
         hand = []
         # draw two cards hand
-        hand.append(Deck.draw())
-        hand.append(Deck.draw())
+        hand.append(deck.draw())
+        hand.append(deck.draw())
 
   # Computes the score of a hand. 
   # For examples of hands and scores as a number.
@@ -94,8 +95,31 @@ class Blackjack:
   # 9, Jack, Ace -> 20 
   # If the Hand is a bust return -1 (because it always loses)
   def _get_score(self, hand: List[Card]) -> int:
+    # init score and num_aces variables
+    score = 0
+    num_aces = 0
+    
+    # sum the face value of the cards in the hand
+    for card in hand:
+      if card.value in ["Jack", "Queen", "King"]:
+        score += 10
+      elif card.rank == "Ace":
+        score += 11
+        num_aces += 1
+      else:
+        score += card.rank
+    
+    # handle aces
+    while score > 21 and num_aces > 0:
+      score -= 10
+      num_aces -= 1
+    
+    # return the score or -1 if the hand is a bust
+    if score > 21:
+      return -1
+    else:
+      return score
 
-        pass
   
   # Prints the current hand and score.
   # E.g. would print out (Ace of Clubs, Jack of Spades, 21)
