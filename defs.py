@@ -14,16 +14,16 @@ class Card:
 
     # Returns the suit of the card.
     def suit(self) -> str:
-        print(self.suit)
+        return self.suit
 
     # Returns the value of the card.
     def value(self) -> str:
-        print(self.value)
+        return self.value
 
     # Returns a string representation of Card
     # E.g. "Ace of Spades"
     def __str__(self) -> str:
-        return self.value + 'of' + self.suit 
+        return self.value + ' of ' + self.suit 
 
 class Deck:
     
@@ -55,8 +55,8 @@ class Deck:
 
     # Removes and returns the top card in the deck. The card should no longer be in the Deck.
     def draw(self) -> Card:
-        # draw_card = self.deck.pop()
-        drawn_card = self.deck.remove(0)
+        drawn_card = self.deck.pop()
+        # drawn_card = self.deck.remove(0)
         return drawn_card
 
     # Adds the input card to the deck. 
@@ -124,8 +124,13 @@ class Blackjack:
   # Prints the current hand and score.
   # E.g. would print out (Ace of Clubs, Jack of Spades, 21)
   # E.g. (Jack of Clubs, 5 of Diamonds, 8 of Hearts, "Bust!")
-  def _print_current_hand(self) -> None:
-        pass
+  def _print_current_hand(self, hand: List[Card]) -> None:
+        current_hand_str = []
+        for card in hand:
+            current_hand_str.append(f"{card.value} of {card.suit}")
+
+        score = self._get_score(hand)
+        print(f"Current Hand: {', '.join(current_hand_str)}, Score: {score}")
   
   # The previous hand is discarded and shuffled back into the deck.
   # Should remove the top 2 cards from the current deck and 
