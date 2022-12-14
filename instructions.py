@@ -1,3 +1,5 @@
+from typing import List
+
 class Card:
 
     # Card constructor
@@ -9,14 +11,14 @@ class Card:
        pass
     # Returns the value of the card.
     def value(self) -> str:
-        pass     
+             pass
     # Returns a string representation of Card
     # E.g. "Ace of Spades"
     def __str__(self) -> str:
         pass
 
 class Deck:
-    
+    pass
     # Creates a sorted deck of playing cards. 13 values, 4 suits.
     # You will iterate over all pairs of suits and values to add them to the deck.
     # Once the deck is initialized, you should prepare it by shuffling it once.
@@ -53,7 +55,7 @@ class Deck:
 class Blackjack:
   # Creates a Blackjack game with a new Deck.
   def __init__(self):
-        pass  
+          pass
   # Computes the score of a hand. 
   # For examples of hands and scores as a number.
   # 2,5 -> 7

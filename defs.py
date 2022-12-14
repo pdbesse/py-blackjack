@@ -23,7 +23,7 @@ class Card:
     # Returns a string representation of Card
     # E.g. "Ace of Spades"
     def __str__(self) -> str:
-        return self.value + ' of ' + self.suit 
+        return f"{self.value + ' of ' + self.suit}"
 
 class Deck:
     
@@ -37,9 +37,9 @@ class Deck:
       self.deck = []
       for suit in SUITS:
         for value in VALUES:
-            self.deck.append(Card(suit, value))
-            
-        self.shuffle()
+            card = Card(suit, value)
+            self.deck.append(card)
+      self.shuffle()
     
     # Returns the number of Cards in the Deck
     def size(self) -> int:
@@ -51,11 +51,11 @@ class Deck:
 
     # Returns the top Card in the deck, but does not modify the deck.
     def peek(self) -> Card:
-        print(self.deck[0])
+        print(self.deck[-1])
 
     # Removes and returns the top card in the deck. The card should no longer be in the Deck.
     def draw(self) -> Card:
-        return self.deck.pop(0)
+        return self.deck.pop()
 
     # Adds the input card to the deck. 
     # If the deck has more than 52 cards, do not add the card and raise an exception.
@@ -80,11 +80,6 @@ class Blackjack:
   # Creates a Blackjack game with a new Deck.
   def __init__(self):
         deck = Deck() 
-        # init empty hand
-        hand = []
-        # draw two cards hand
-        hand.append(deck.draw())
-        hand.append(deck.draw())
 
   # Computes the score of a hand. 
   # For examples of hands and scores as a number.
@@ -95,20 +90,30 @@ class Blackjack:
   # 10, 8, 4 -> Bust so return -1
   # 9, Jack, Ace -> 20 
   # If the Hand is a bust return -1 (because it always loses)
-  def _get_score(self, hand: List[Card]) -> int:
+  def _get_score(self) -> int:
     # init score and num_aces variables
     score = 0
     num_aces = 0
+    card_value = {"Two":2, "Three":3, "Four":4, "Five":5, "Six":6, "Seven":7, "Eight":8, "Nine":9, "Ten":10}
     
+    # compile number of aces
+    # for card in self.hand:
+    #     if (card.value == "Ace"): num_aces += 1
+    
+    # for card in self.hand:
+    #     if (card.value != "Ace"):
+    #         score += card_value[card.value]
+
     # sum the face value of the cards in the hand
-    for card in hand:
-      if card.value in ["Jack", "Queen", "King"]:
-        score += 10
-      elif card.rank == "Ace":
-        score += 11
-        num_aces += 1
-      else:
-        score += card.rank
+    for card in self.hand:
+        # print(card)
+        if card.value == "Ace":
+            score += 11
+            num_aces += 1
+        elif card.value == "Jack" or "Queen" or "King":
+            score += 10
+        else:
+            score += card_value[card.value]
     
     # handle aces
     while score > 21 and num_aces > 0:
@@ -125,13 +130,13 @@ class Blackjack:
   # Prints the current hand and score.
   # E.g. would print out (Ace of Clubs, Jack of Spades, 21)
   # E.g. (Jack of Clubs, 5 of Diamonds, 8 of Hearts, "Bust!")
-  def _print_current_hand(self, hand: List[Card]) -> None:
+  def _print_current_hand(self) -> None:
         current_hand_str = []
-        for card in hand:
-            current_hand_str.append(f"{card.value} of {card.suit}")
+        for card in self.hand:
+            current_hand_str.append(card.__str__)
 
-        score = self._get_score(hand)
-        print(f"Current Hand: {', '.join(current_hand_str)}, Score: {score}")
+        score = self._get_score(self.hand)
+        print("Current Hand: ", current_hand_str, score)
   
   # The previous hand is discarded and shuffled back into the deck.
   # Should remove the top 2 cards from the current deck and 
@@ -140,12 +145,16 @@ class Blackjack:
   # If less than 2 cards are in the deck, 
   # then print an error instructing the client to shuffle the deck.
   def deal_new_hand(self) -> None:
-        pass
+    if len(self.deck) < 2:
+      print("Please shuffle the deck.")
 
   # Deals one more card to the current hand and prints the hand and score.
   # If no cards remain in the deck, print an error.
   def hit(self) -> None: 
-        pass
+        if (len(self.deck) == 0): print("error")
+        else:
+            self.hand.append(self.deck.draw())
+            self._print_current_hand()
   
   # Reshuffles all cards in the "current hand" and "discard pile"
   # and shuffles everything back into the Deck.
